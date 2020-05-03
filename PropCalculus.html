@@ -13080,8 +13080,9 @@ div#notebook {
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-fsharp"><pre><span></span><span class="c1">// Load the Sylph package which contains the PropCalculus theory</span>
-<span class="c1">// Run this cell first if there are any namespace errors when using this notebook.</span>
-<span class="o">#</span><span class="n">r</span> <span class="s">&quot;nuget: Sylph&quot;</span> 
+<span class="c1">// Run this cell first if there are any namespace errors when using this notebook. </span>
+<span class="o">#</span><span class="n">r</span> <span class="s">&quot;nuget: Sylph&quot;</span>
+<span class="c1">// Load helpers for the Jupyter .NET Core kernel.</span>
 <span class="o">#</span><span class="n">load</span> <span class="s">&quot;netcore.fsx&quot;</span>
 </pre></div>
 
@@ -13124,15 +13125,13 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-fsharp"><pre><span></span><span class="c1">// Theorem 3.2</span>
 <span class="k">let</span> <span class="n">``3.2``</span> <span class="o">=</span> <span class="n">proof</span> <span class="n">prop_calculus</span> <span class="o">&lt;@</span> <span class="n">p</span> <span class="o">=</span> <span class="n">p</span> <span class="o">=</span> <span class="n">q</span> <span class="o">=</span> <span class="n">q</span> <span class="o">@&gt;</span>  <span class="o">[</span>
     <span class="n">RightAssoc</span> <span class="o">|&gt;</span> <span class="n">LR</span>
-    <span class="n">RightAssoc</span> <span class="o">|&gt;</span> <span class="n">LR</span>
     <span class="n">def_true</span> <span class="o">&lt;@</span> <span class="n">q</span> <span class="o">@&gt;</span> <span class="o">|&gt;</span> <span class="n">Trn</span> <span class="o">|&gt;</span> <span class="n">R</span>
-    <span class="n">LeftAssoc</span> <span class="o">|&gt;</span> <span class="n">LR</span>
     <span class="n">Commute</span> <span class="o">|&gt;</span> <span class="n">LR</span>
 <span class="o">]</span>
 </pre></div>
@@ -13163,13 +13162,9 @@ div#notebook {
 Proof of p = p = q = q:
 1. Logical operators in expression are right-associative: p = p = q = q → p = p = (q = q).
 Proof incomplete. Current state: p = p = (q = q).
-2. Logical operators in expression are right-associative: p = p = (q = q) → p = (p = (q = q)).
-Proof incomplete. Current state: p = (p = (q = q)).
-3. Substitute q = q ≡ true into right of expression.
-Proof incomplete. Current state: p = (p = true).
-4. Logical operators in expression are left-associative: p = (p = true) → p = p = true.
+2. Substitute q = q ≡ true into right of expression.
 Proof incomplete. Current state: p = p = true.
-5. Logical operators in expression are commutative: p = p = true → true = (p = p).
+3. Logical operators in expression are commutative: p = p = true → true = (p = p).
 ⊢ true = (p = p). [Definition of true]
 Proof complete.
 </pre>
@@ -13182,7 +13177,7 @@ Proof complete.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-fsharp"><pre><span></span><span class="c1">// Theorem 3.4</span>
@@ -13223,7 +13218,7 @@ Proof complete.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-fsharp"><pre><span></span><span class="c1">// Theorem 3.5</span>
@@ -13258,7 +13253,7 @@ Proof complete.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-fsharp"><pre><span></span><span class="c1">// Theorem 3.11</span>
@@ -13307,15 +13302,14 @@ Proof complete.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-fsharp"><pre><span></span><span class="c1">// Theorem 3.12 </span>
 <span class="k">let</span> <span class="n">``3.12``</span> <span class="o">=</span> <span class="n">proof</span> <span class="n">prop_calculus</span> <span class="o">&lt;@</span> <span class="ow">not</span> <span class="o">(</span><span class="ow">not</span> <span class="n">p</span><span class="o">)</span> <span class="o">=</span> <span class="n">p</span> <span class="o">@&gt;</span> <span class="o">[</span>
         <span class="n">Collect</span> <span class="o">|&gt;</span> <span class="n">LR</span>
         <span class="n">def_false</span> <span class="o">&lt;@</span> <span class="n">p</span> <span class="o">@&gt;</span> <span class="o">|&gt;</span> <span class="n">Trn</span> <span class="o">|&gt;</span> <span class="n">LR</span>
-        <span class="n">not_false</span> <span class="o">|&gt;</span> <span class="n">LR</span>
-        <span class="n">def_true</span> <span class="o">&lt;@</span> <span class="n">p</span> <span class="o">@&gt;</span> <span class="o">|&gt;</span> <span class="n">LR</span>
+        <span class="n">not_false</span> <span class="o">|&gt;</span> <span class="n">Truth</span> <span class="o">|&gt;</span> <span class="n">LR</span>
     <span class="o">]</span>
 </pre></div>
 
@@ -13358,8 +13352,26 @@ Proof complete.
         ⊢ false = ¬ true. [Definition of false]
         Proof complete.
 
-[Lemma] true = (p = p):
-        ⊢ true = (p = p). [Definition of true]
+[Lemma] true = true = true:
+        1. Logical operators in expression are commutative: true = true = true → true = (true = true).
+        ⊢ true = (true = true). [Definition of true]
+        Proof complete.
+
+[Lemma] ¬ false = (true = true):
+        1. Substitute true = true ≡ true into right of expression.
+        Proof incomplete. Current state: ¬ false = true.
+        2. Logical operators in expression are commutative: ¬ false = true → true = ¬ false.
+        Proof incomplete. Current state: true = ¬ false.
+        3. Substitute true ≡ false = false into left of expression.
+        Proof incomplete. Current state: false = false = ¬ false.
+        4. Logical operators in expression are right-associative: false = false = ¬ false → false = (false = ¬ false).
+        Proof incomplete. Current state: false = (false = ¬ false).
+        5. Logical operators in right of expression are commutative: false = (false = ¬ false) → false = (¬ false = false).
+        Proof incomplete. Current state: false = (¬ false = false).
+        6. Collect distributed logical terms in right of expression: false = (¬ false = false) → false = ¬ (false = false).
+        Proof incomplete. Current state: false = ¬ (false = false).
+        7. Substitute false = false ≡ true into right of expression.
+        ⊢ false = ¬ true. [Definition of false]
         Proof complete.
 
 Proof of ¬ (¬ p) = p:
@@ -13367,10 +13379,8 @@ Proof of ¬ (¬ p) = p:
 Proof incomplete. Current state: ¬ (¬ p = p).
 2. Substitute ¬ p = p ≡ false into expression.
 Proof incomplete. Current state: ¬ false.
-3. Substitute ¬ false ≡ true into expression.
-Proof incomplete. Current state: true.
-4. Substitute true ≡ p = p into expression.
-⊢ p = p. [Axiom of Symbolic Equality]
+3. Substitute ¬ false ≡ true = true into expression.
+⊢ true = true. [Axiom of Symbolic Equality]
 Proof complete.
 </pre>
 </div>
@@ -13382,7 +13392,7 @@ Proof complete.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-fsharp"><pre><span></span><span class="c1">// Theorem 3.13</span>
@@ -13447,7 +13457,7 @@ Proof complete.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-fsharp"><pre><span></span><span class="c1">// Theorem 3.14</span>
@@ -13482,7 +13492,7 @@ Proof complete.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-fsharp"><pre><span></span><span class="c1">// Theorem 3.15</span>
@@ -13534,7 +13544,7 @@ Proof complete.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-fsharp"><pre><span></span><span class="c1">// Theorem 3.16</span>
@@ -13585,7 +13595,7 @@ Proof complete.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-fsharp"><pre><span></span><span class="c1">// Theorem 3.17</span>
@@ -13686,7 +13696,7 @@ Proof complete.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-fsharp"><pre><span></span><span class="c1">// Theorem 3.29</span>
@@ -13733,7 +13743,7 @@ Proof complete.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-fsharp"><pre><span></span><span class="c1">// Theorem 3.30</span>
@@ -13798,18 +13808,13 @@ Proof complete.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-fsharp"><pre><span></span><span class="c1">// Theorem 3.31</span>
 <span class="k">let</span> <span class="n">``3.31``</span> <span class="o">=</span> <span class="n">proof</span> <span class="n">prop_calculus</span> <span class="o">&lt;@</span> <span class="o">(</span><span class="n">p</span> <span class="o">|||</span> <span class="o">(</span><span class="n">q</span> <span class="o">|||</span> <span class="n">r</span><span class="o">))</span> <span class="o">=</span> <span class="o">((</span><span class="n">p</span> <span class="o">|||</span> <span class="n">q</span><span class="o">)</span> <span class="o">|||</span> <span class="o">(</span><span class="n">p</span> <span class="o">|||</span> <span class="n">r</span><span class="o">))</span> <span class="o">@&gt;</span> <span class="o">[</span>
-    <span class="n">LeftAssoc</span> <span class="o">|&gt;</span> <span class="n">R</span>
-    <span class="n">right_assoc_or</span> <span class="o">&lt;@</span> <span class="n">p</span> <span class="o">@&gt;</span> <span class="o">&lt;@</span> <span class="n">q</span> <span class="o">@&gt;</span> <span class="o">&lt;@</span> <span class="n">p</span> <span class="o">@&gt;</span> <span class="o">|&gt;</span> <span class="n">R</span>
-    <span class="n">commute_or</span> <span class="o">&lt;@</span> <span class="n">q</span> <span class="o">@&gt;</span> <span class="o">&lt;@</span> <span class="n">p</span> <span class="o">@&gt;</span> <span class="o">|&gt;</span> <span class="n">R</span>
-    <span class="n">LeftAssoc</span> <span class="o">|&gt;</span> <span class="n">R</span>
-    <span class="n">commute_or</span> <span class="o">&lt;@</span> <span class="n">p</span> <span class="o">@&gt;</span> <span class="o">&lt;@</span> <span class="n">q</span> <span class="o">@&gt;</span> <span class="o">|&gt;</span> <span class="n">R</span>
+    <span class="n">commute_or_or</span> <span class="o">&lt;@</span> <span class="n">p</span> <span class="o">@&gt;</span> <span class="o">&lt;@</span> <span class="n">q</span> <span class="o">@&gt;</span> <span class="o">&lt;@</span> <span class="n">p</span> <span class="o">@&gt;</span> <span class="o">&lt;@</span> <span class="n">r</span> <span class="o">@&gt;</span> <span class="o">|&gt;</span> <span class="n">R</span>
     <span class="n">idemp_or</span> <span class="o">&lt;@</span> <span class="n">p</span> <span class="o">@&gt;</span> <span class="o">|&gt;</span> <span class="n">R</span>
-    <span class="n">LeftAssoc</span> <span class="o">|&gt;</span> <span class="n">L</span>
 <span class="o">]</span>
 </pre></div>
 
@@ -13827,7 +13832,12 @@ Proof complete.
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[Lemma] p ∨ (q ∨ p) = p ∨ q ∨ p:
+<pre>[Lemma] p ∨ q ∨ (p ∨ r) = p ∨ q ∨ p ∨ r:
+        1. Logical operators in expression are left-associative: p ∨ q ∨ (p ∨ r) = p ∨ q ∨ p ∨ r → p ∨ q ∨ p ∨ r = p ∨ q ∨ p ∨ r.
+        ⊢ p ∨ q ∨ p ∨ r = p ∨ q ∨ p ∨ r. [Axiom of Symbolic Equality]
+        Proof complete.
+
+[Lemma] p ∨ (q ∨ p) = p ∨ q ∨ p:
         1. Logical operators in expression are left-associative: p ∨ (q ∨ p) = p ∨ q ∨ p → p ∨ q ∨ p = p ∨ q ∨ p.
         ⊢ p ∨ q ∨ p = p ∨ q ∨ p. [Axiom of Symbolic Equality]
         Proof complete.
@@ -13840,8 +13850,15 @@ Proof complete.
         ⊢ q ∨ p = p ∨ q. [Axiom of Commutativity]
         Proof complete.
 
-[Lemma] p ∨ q = q ∨ p:
-        ⊢ p ∨ q = q ∨ p. [Axiom of Commutativity]
+[Lemma] p ∨ q ∨ (p ∨ r) = p ∨ p ∨ (q ∨ r):
+        1. Substitute p ∨ q ∨ (p ∨ r) ≡ p ∨ q ∨ p ∨ r into left of expression.
+        Proof incomplete. Current state: p ∨ q ∨ p ∨ r = p ∨ p ∨ (q ∨ r).
+        2. Substitute p ∨ q ∨ p ≡ p ∨ (q ∨ p) into left of expression.
+        Proof incomplete. Current state: p ∨ (q ∨ p) ∨ r = p ∨ p ∨ (q ∨ r).
+        3. Substitute q ∨ p ≡ p ∨ q into left of expression.
+        Proof incomplete. Current state: p ∨ (p ∨ q) ∨ r = p ∨ p ∨ (q ∨ r).
+        4. Logical operators in left of expression are left-associative: p ∨ (p ∨ q) ∨ r = p ∨ p ∨ (q ∨ r) → p ∨ p ∨ q ∨ r = p ∨ p ∨ (q ∨ r).
+        ⊢ p ∨ p ∨ q ∨ r = p ∨ p ∨ (q ∨ r). [Axiom of Associativity]
         Proof complete.
 
 [Lemma] p ∨ p = p:
@@ -13849,20 +13866,10 @@ Proof complete.
         Proof complete.
 
 Proof of p ∨ (q ∨ r) = p ∨ q ∨ (p ∨ r):
-1. Logical operators in right of expression are left-associative: p ∨ (q ∨ r) = p ∨ q ∨ (p ∨ r) → p ∨ (q ∨ r) = p ∨ q ∨ p ∨ r.
-Proof incomplete. Current state: p ∨ (q ∨ r) = p ∨ q ∨ p ∨ r.
-2. Substitute p ∨ q ∨ p ≡ p ∨ (q ∨ p) into right of expression.
-Proof incomplete. Current state: p ∨ (q ∨ r) = p ∨ (q ∨ p) ∨ r.
-3. Substitute q ∨ p ≡ p ∨ q into right of expression.
-Proof incomplete. Current state: p ∨ (q ∨ r) = p ∨ (p ∨ q) ∨ r.
-4. Logical operators in right of expression are left-associative: p ∨ (q ∨ r) = p ∨ (p ∨ q) ∨ r → p ∨ (q ∨ r) = p ∨ p ∨ q ∨ r.
-Proof incomplete. Current state: p ∨ (q ∨ r) = p ∨ p ∨ q ∨ r.
-5. Substitute p ∨ q ≡ q ∨ p into expression: No change.
-Proof incomplete. Current state: p ∨ (q ∨ r) = p ∨ p ∨ q ∨ r.
-6. Substitute p ∨ p ≡ p into right of expression.
-Proof incomplete. Current state: p ∨ (q ∨ r) = p ∨ q ∨ r.
-7. Logical operators in left of expression are left-associative: p ∨ (q ∨ r) = p ∨ q ∨ r → p ∨ q ∨ r = p ∨ q ∨ r.
-⊢ p ∨ q ∨ r = p ∨ q ∨ r. [Axiom of Symbolic Equality]
+1. Substitute p ∨ q ∨ (p ∨ r) ≡ p ∨ p ∨ (q ∨ r) into right of expression.
+Proof incomplete. Current state: p ∨ (q ∨ r) = p ∨ p ∨ (q ∨ r).
+2. Substitute p ∨ p ≡ p into right of expression.
+⊢ p ∨ (q ∨ r) = p ∨ (q ∨ r). [Axiom of Symbolic Equality]
 Proof complete.
 </pre>
 </div>
@@ -13874,7 +13881,7 @@ Proof complete.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-fsharp"><pre><span></span><span class="k">let</span> <span class="n">``3.32``</span> <span class="o">=</span> <span class="n">proof</span> <span class="n">prop_calculus</span> <span class="o">&lt;@</span> <span class="o">(</span><span class="n">p</span> <span class="o">|||</span> <span class="n">q</span><span class="o">)</span> <span class="o">=</span> <span class="o">(</span><span class="n">p</span> <span class="o">|||</span> <span class="ow">not</span> <span class="n">q</span> <span class="o">=</span> <span class="n">p</span><span class="o">)</span> <span class="o">@&gt;</span> <span class="o">[</span>
@@ -13996,12 +14003,26 @@ Proof complete.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-fsharp"><pre><span></span><span class="k">let</span> <span class="n">``3.37``</span> <span class="o">=</span> <span class="n">proof</span> <span class="n">prop_calculus</span> <span class="o">&lt;@</span> <span class="o">(</span><span class="n">p</span> <span class="o">|&amp;|</span> <span class="n">q</span> <span class="o">|&amp;|</span> <span class="n">r</span><span class="o">)</span> <span class="o">=</span> <span class="o">(</span><span class="n">p</span> <span class="o">|&amp;|</span> <span class="o">(</span><span class="n">q</span> <span class="o">|&amp;|</span> <span class="n">r</span><span class="o">))</span> <span class="o">@&gt;</span> <span class="o">[</span>
-    <span class="n">L</span> <span class="n">GoldenRule</span>
-    <span class="n">R</span> <span class="n">GoldenRule</span>
+    <span class="n">golden_rule</span> <span class="o">&lt;@</span> <span class="n">p</span> <span class="o">@&gt;</span> <span class="o">&lt;@</span> <span class="n">q</span> <span class="o">@&gt;</span> <span class="o">|&gt;</span> <span class="n">L</span>
+    <span class="n">golden_rule</span> <span class="o">&lt;@</span> <span class="o">(</span><span class="n">p</span> <span class="o">=</span> <span class="n">q</span><span class="o">)</span> <span class="o">=</span> <span class="o">(</span><span class="n">p</span> <span class="o">|||</span> <span class="n">q</span><span class="o">)</span> <span class="o">@&gt;</span> <span class="o">&lt;@</span> <span class="n">r</span> <span class="o">@&gt;</span> <span class="o">|&gt;</span> <span class="n">L</span> 
+    <span class="n">commute_or</span> <span class="o">&lt;@</span> <span class="o">((</span><span class="n">p</span> <span class="o">=</span> <span class="n">q</span><span class="o">)</span> <span class="o">=</span> <span class="o">(</span><span class="n">p</span> <span class="o">|||</span> <span class="n">q</span><span class="o">))</span> <span class="o">@&gt;</span> <span class="o">&lt;@</span> <span class="n">r</span> <span class="o">@&gt;</span> <span class="o">|&gt;</span> <span class="n">L</span>
+    <span class="n">distrib_or_eq</span> <span class="o">&lt;@</span> <span class="n">r</span> <span class="o">@&gt;</span> <span class="o">&lt;@</span> <span class="n">p</span> <span class="o">=</span> <span class="n">q</span> <span class="o">@&gt;</span> <span class="o">&lt;@</span> <span class="n">p</span> <span class="o">|||</span> <span class="n">q</span> <span class="o">@&gt;</span> <span class="o">|&gt;</span> <span class="n">L</span>
+    <span class="n">distrib_or_eq</span> <span class="o">&lt;@</span> <span class="n">r</span> <span class="o">@&gt;</span> <span class="o">&lt;@</span> <span class="n">p</span> <span class="o">@&gt;</span> <span class="o">&lt;@</span> <span class="n">q</span> <span class="o">@&gt;</span> <span class="o">|&gt;</span> <span class="n">L</span>
+    <span class="n">right_assoc_eq</span> <span class="o">&lt;@</span> <span class="n">p</span> <span class="o">=</span> <span class="n">q</span><span class="o">@&gt;</span> <span class="o">&lt;@</span> <span class="n">p</span> <span class="o">|||</span> <span class="n">q</span><span class="o">@&gt;</span> <span class="o">&lt;@</span> <span class="n">r</span> <span class="o">@&gt;</span> <span class="o">|&gt;</span> <span class="n">L</span>
+    <span class="n">commute_eq</span> <span class="o">&lt;@</span> <span class="n">p</span> <span class="o">|||</span> <span class="n">q</span> <span class="o">@&gt;</span> <span class="o">&lt;@</span> <span class="n">r</span> <span class="o">@&gt;</span> <span class="o">|&gt;</span> <span class="n">L</span>
+    <span class="n">commute_or</span> <span class="o">&lt;@</span> <span class="n">r</span> <span class="o">@&gt;</span> <span class="o">&lt;@</span> <span class="n">q</span> <span class="o">@&gt;</span> <span class="o">|&gt;</span> <span class="n">L</span>
+    <span class="n">commute_eq</span> <span class="o">&lt;@</span> <span class="n">r</span> <span class="o">|||</span> <span class="n">p</span><span class="o">@&gt;</span> <span class="o">&lt;@</span> <span class="n">q</span> <span class="o">|||</span> <span class="n">r</span><span class="o">@&gt;</span> <span class="o">|&gt;</span> <span class="n">L</span>
+    <span class="n">commute_or</span> <span class="o">&lt;@</span> <span class="n">r</span> <span class="o">@&gt;</span> <span class="o">&lt;@</span> <span class="n">p</span> <span class="o">|||</span> <span class="n">q</span> <span class="o">@&gt;</span> <span class="o">|&gt;</span> <span class="n">L</span>
+    <span class="n">L</span> <span class="n">LeftAssoc</span>
+    <span class="n">L</span> <span class="n">LeftAssoc</span>
+    <span class="n">L</span> <span class="n">LeftAssoc</span>
+    <span class="n">commute_and</span> <span class="o">&lt;@</span> <span class="n">p</span> <span class="o">@&gt;</span> <span class="o">&lt;@</span> <span class="n">q</span> <span class="o">|&amp;|</span> <span class="n">r</span> <span class="o">@&gt;</span> <span class="o">|&gt;</span> <span class="n">R</span>
+    <span class="n">ident_and_eq_all</span> <span class="o">&lt;@</span> <span class="n">q</span> <span class="o">@&gt;</span> <span class="o">&lt;@</span> <span class="n">r</span> <span class="o">@&gt;</span> <span class="o">&lt;@</span> <span class="n">p</span> <span class="o">@&gt;</span> <span class="o">|&gt;</span> <span class="n">R</span>
+    <span class="n">commute_eq</span> <span class="o">&lt;@</span><span class="n">q</span> <span class="o">=</span> <span class="n">r</span><span class="o">@&gt;</span> <span class="o">&lt;@</span> <span class="n">p</span> <span class="o">@&gt;</span> <span class="o">|&gt;</span> <span class="n">R</span>
 <span class="o">]</span>
 </pre></div>
 
@@ -14019,11 +14040,185 @@ Proof complete.
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Proof of p ∧ q ∧ r = (p ∧ (q ∧ r)):
-1. Logical terms in left of expression satisfy the golden rule: p ∧ q ∧ r = (p ∧ (q ∧ r)) → p ∧ q = r = (p ∧ q) ∨ r = (p ∧ (q ∧ r)).
-Proof incomplete. Current state: p ∧ q = r = (p ∧ q) ∨ r = (p ∧ (q ∧ r)).
-2. Logical terms in right of expression satisfy the golden rule: p ∧ q = r = (p ∧ q) ∨ r = (p ∧ (q ∧ r)) → p ∧ q = r = (p ∧ q) ∨ r = (p = (q ∧ r) = p ∨ (q ∧ r)).
-Proof incomplete. Current state: p ∧ q = r = (p ∧ q) ∨ r = (p = (q ∧ r) = p ∨ (q ∧ r)).
+<pre>[Lemma] p ∧ q = (p = q = p ∨ q):
+        ⊢ p ∧ q = (p = q = p ∨ q). [Axiom of the Golden Rule]
+        Proof complete.
+
+[Lemma] p = q = p ∨ q ∧ r = (p = q = p ∨ q = r = (p = q = p ∨ q) ∨ r):
+        ⊢ p = q = p ∨ q ∧ r = (p = q = p ∨ q = r = (p = q = p ∨ q) ∨ r). [Axiom of the Golden Rule]
+        Proof complete.
+
+[Lemma] (p = q = p ∨ q) ∨ r = r ∨ (p = q = p ∨ q):
+        ⊢ (p = q = p ∨ q) ∨ r = r ∨ (p = q = p ∨ q). [Axiom of Commutativity]
+        Proof complete.
+
+[Lemma] r ∨ (p = q = p ∨ q) = (r ∨ (p = q) = r ∨ (p ∨ q)):
+        ⊢ r ∨ (p = q = p ∨ q) = (r ∨ (p = q) = r ∨ (p ∨ q)). [Axiom of Distributivity]
+        Proof complete.
+
+[Lemma] r ∨ (p = q) = (r ∨ p = r ∨ q):
+        ⊢ r ∨ (p = q) = (r ∨ p = r ∨ q). [Axiom of Distributivity]
+        Proof complete.
+
+[Lemma] p = q = (p ∨ q = r) = (p = q = p ∨ q = r):
+        1. Logical operators in right of expression are right-associative: p = q = (p ∨ q = r) = (p = q = p ∨ q = r) → p = q = (p ∨ q = r) = (p = q = (p ∨ q = r)).
+        ⊢ p = q = (p ∨ q = r) = (p = q = (p ∨ q = r)). [Axiom of Symbolic Equality]
+        Proof complete.
+
+[Lemma] p = q = p ∨ q = r = (p = q = (p ∨ q = r)):
+        ⊢ p = q = p ∨ q = r = (p = q = (p ∨ q = r)). [Axiom of Associativity]
+        Proof complete.
+
+[Lemma] p ∨ q = r = (r = p ∨ q):
+        1. Logical operators in expression are left-associative: p ∨ q = r = (r = p ∨ q) → p ∨ q = r = r = p ∨ q.
+        ⊢ p ∨ q = r = r = p ∨ q. [Axiom of Symmetry]
+        Proof complete.
+
+[Lemma] r ∨ q = q ∨ r:
+        ⊢ r ∨ q = q ∨ r. [Axiom of Commutativity]
+        Proof complete.
+
+[Lemma] r ∨ p = q ∨ r = (q ∨ r = r ∨ p):
+        1. Logical operators in expression are left-associative: r ∨ p = q ∨ r = (q ∨ r = r ∨ p) → r ∨ p = q ∨ r = q ∨ r = r ∨ p.
+        ⊢ r ∨ p = q ∨ r = q ∨ r = r ∨ p. [Axiom of Symmetry]
+        Proof complete.
+
+[Lemma] r ∨ (p ∨ q) = p ∨ q ∨ r:
+        ⊢ r ∨ (p ∨ q) = p ∨ q ∨ r. [Axiom of Commutativity]
+        Proof complete.
+
+[Lemma] (q ∧ r) ∨ p = p ∨ (q ∧ r):
+        ⊢ (q ∧ r) ∨ p = p ∨ (q ∧ r). [Axiom of Commutativity]
+        Proof complete.
+
+[Lemma] q ∧ r = p = (p = (q ∧ r)):
+        1. Logical operators in expression are left-associative: q ∧ r = p = (p = (q ∧ r)) → q ∧ r = p = p = (q ∧ r).
+        ⊢ q ∧ r = p = p = (q ∧ r). [Axiom of Symmetry]
+        Proof complete.
+
+[Lemma] p ∧ (q ∧ r) = (q ∧ r ∧ p):
+        1. Logical terms in expression satisfy the golden rule: p ∧ (q ∧ r) = (q ∧ r ∧ p) → p = (q ∧ r) = p ∨ (q ∧ r) = (q ∧ r = p = (q ∧ r) ∨ p).
+        Proof incomplete. Current state: p = (q ∧ r) = p ∨ (q ∧ r) = (q ∧ r = p = (q ∧ r) ∨ p).
+        2. Substitute (q ∧ r) ∨ p ≡ p ∨ (q ∧ r) into right of expression.
+        Proof incomplete. Current state: p = (q ∧ r) = p ∨ (q ∧ r) = (q ∧ r = p = p ∨ (q ∧ r)).
+        3. Substitute q ∧ r = p ≡ p = (q ∧ r) into right of expression.
+        ⊢ p = (q ∧ r) = p ∨ (q ∧ r) = (p = (q ∧ r) = p ∨ (q ∧ r)). [Axiom of Symbolic Equality]
+        Proof complete.
+
+[Lemma] q ∧ r = (q = r = q ∨ r):
+        ⊢ q ∧ r = (q = r = q ∨ r). [Axiom of the Golden Rule]
+        Proof complete.
+
+[Lemma] q = r = q ∨ r ∧ p = (q = r = q ∨ r = p = (q = r = q ∨ r) ∨ p):
+        ⊢ q = r = q ∨ r ∧ p = (q = r = q ∨ r = p = (q = r = q ∨ r) ∨ p). [Axiom of the Golden Rule]
+        Proof complete.
+
+[Lemma] (q = r = q ∨ r) ∨ p = p ∨ (q = r = q ∨ r):
+        ⊢ (q = r = q ∨ r) ∨ p = p ∨ (q = r = q ∨ r). [Axiom of Commutativity]
+        Proof complete.
+
+[Lemma] p ∨ (q = r = q ∨ r) = (p ∨ (q = r) = p ∨ (q ∨ r)):
+        ⊢ p ∨ (q = r = q ∨ r) = (p ∨ (q = r) = p ∨ (q ∨ r)). [Axiom of Distributivity]
+        Proof complete.
+
+[Lemma] p ∨ (q = r) = (p ∨ q = p ∨ r):
+        ⊢ p ∨ (q = r) = (p ∨ q = p ∨ r). [Axiom of Distributivity]
+        Proof complete.
+
+[Lemma] q = r = (q ∨ r = p) = (q = r = q ∨ r = p):
+        1. Logical operators in right of expression are right-associative: q = r = (q ∨ r = p) = (q = r = q ∨ r = p) → q = r = (q ∨ r = p) = (q = r = (q ∨ r = p)).
+        ⊢ q = r = (q ∨ r = p) = (q = r = (q ∨ r = p)). [Axiom of Symbolic Equality]
+        Proof complete.
+
+[Lemma] q = r = q ∨ r = p = (q = r = (q ∨ r = p)):
+        ⊢ q = r = q ∨ r = p = (q = r = (q ∨ r = p)). [Axiom of Associativity]
+        Proof complete.
+
+[Lemma] q ∨ r = p = (p = q ∨ r):
+        1. Logical operators in expression are left-associative: q ∨ r = p = (p = q ∨ r) → q ∨ r = p = p = q ∨ r.
+        ⊢ q ∨ r = p = p = q ∨ r. [Axiom of Symmetry]
+        Proof complete.
+
+[Lemma] p ∨ r = r ∨ p:
+        ⊢ p ∨ r = r ∨ p. [Axiom of Commutativity]
+        Proof complete.
+
+[Lemma] p ∨ q = r ∨ p = (r ∨ p = p ∨ q):
+        1. Logical operators in expression are left-associative: p ∨ q = r ∨ p = (r ∨ p = p ∨ q) → p ∨ q = r ∨ p = r ∨ p = p ∨ q.
+        ⊢ p ∨ q = r ∨ p = r ∨ p = p ∨ q. [Axiom of Symmetry]
+        Proof complete.
+
+[Lemma] p ∨ (q ∨ r) = q ∨ r ∨ p:
+        ⊢ p ∨ (q ∨ r) = q ∨ r ∨ p. [Axiom of Commutativity]
+        Proof complete.
+
+[Lemma] q ∧ r ∧ p = (q = r = p = q ∨ r = r ∨ p = p ∨ q = q ∨ r ∨ p):
+        1. Substitute q ∧ r ≡ q = r = q ∨ r into left of expression.
+        Proof incomplete. Current state: q = r = q ∨ r ∧ p = (q = r = p = q ∨ r = r ∨ p = p ∨ q = q ∨ r ∨ p).
+        2. Substitute q = r = q ∨ r ∧ p ≡ q = r = q ∨ r = p = (q = r = q ∨ r) ∨ p into left of expression.
+        Proof incomplete. Current state: q = r = q ∨ r = p = (q = r = q ∨ r) ∨ p = (q = r = p = q ∨ r = r ∨ p = p ∨ q = q ∨ r ∨ p).
+        3. Substitute (q = r = q ∨ r) ∨ p ≡ p ∨ (q = r = q ∨ r) into left of expression.
+        Proof incomplete. Current state: q = r = q ∨ r = p = p ∨ (q = r = q ∨ r) = (q = r = p = q ∨ r = r ∨ p = p ∨ q = q ∨ r ∨ p).
+        4. Substitute p ∨ (q = r = q ∨ r) ≡ p ∨ (q = r) = p ∨ (q ∨ r) into left of expression.
+        Proof incomplete. Current state: q = r = q ∨ r = p = (p ∨ (q = r) = p ∨ (q ∨ r)) = (q = r = p = q ∨ r = r ∨ p = p ∨ q = q ∨ r ∨ p).
+        5. Substitute p ∨ (q = r) ≡ p ∨ q = p ∨ r into left of expression.
+        Proof incomplete. Current state: q = r = q ∨ r = p = (p ∨ q = p ∨ r = p ∨ (q ∨ r)) = (q = r = p = q ∨ r = r ∨ p = p ∨ q = q ∨ r ∨ p).
+        6. Substitute q = r = q ∨ r = p ≡ q = r = (q ∨ r = p) into left of expression.
+        Proof incomplete. Current state: q = r = (q ∨ r = p) = (p ∨ q = p ∨ r = p ∨ (q ∨ r)) = (q = r = p = q ∨ r = r ∨ p = p ∨ q = q ∨ r ∨ p).
+        7. Substitute q ∨ r = p ≡ p = q ∨ r into left of expression.
+        Proof incomplete. Current state: q = r = (p = q ∨ r) = (p ∨ q = p ∨ r = p ∨ (q ∨ r)) = (q = r = p = q ∨ r = r ∨ p = p ∨ q = q ∨ r ∨ p).
+        8. Substitute p ∨ r ≡ r ∨ p into left of expression.
+        Proof incomplete. Current state: q = r = (p = q ∨ r) = (p ∨ q = r ∨ p = p ∨ (q ∨ r)) = (q = r = p = q ∨ r = r ∨ p = p ∨ q = q ∨ r ∨ p).
+        9. Substitute p ∨ q = r ∨ p ≡ r ∨ p = p ∨ q into left of expression.
+        Proof incomplete. Current state: q = r = (p = q ∨ r) = (r ∨ p = p ∨ q = p ∨ (q ∨ r)) = (q = r = p = q ∨ r = r ∨ p = p ∨ q = q ∨ r ∨ p).
+        10. Substitute p ∨ (q ∨ r) ≡ q ∨ r ∨ p into left of expression.
+        Proof incomplete. Current state: q = r = (p = q ∨ r) = (r ∨ p = p ∨ q = q ∨ r ∨ p) = (q = r = p = q ∨ r = r ∨ p = p ∨ q = q ∨ r ∨ p).
+        11. Logical operators in left of expression are left-associative: q = r = (p = q ∨ r) = (r ∨ p = p ∨ q = q ∨ r ∨ p) = (q = r = p = q ∨ r = r ∨ p = p ∨ q = q ∨ r ∨ p) → q = r = (p = q ∨ r) = (r ∨ p = p ∨ q) = q ∨ r ∨ p = (q = r = p = q ∨ r = r ∨ p = p ∨ q = q ∨ r ∨ p).
+        Proof incomplete. Current state: q = r = (p = q ∨ r) = (r ∨ p = p ∨ q) = q ∨ r ∨ p = (q = r = p = q ∨ r = r ∨ p = p ∨ q = q ∨ r ∨ p).
+        12. Logical operators in left of expression are left-associative: q = r = (p = q ∨ r) = (r ∨ p = p ∨ q) = q ∨ r ∨ p = (q = r = p = q ∨ r = r ∨ p = p ∨ q = q ∨ r ∨ p) → q = r = (p = q ∨ r) = r ∨ p = p ∨ q = q ∨ r ∨ p = (q = r = p = q ∨ r = r ∨ p = p ∨ q = q ∨ r ∨ p).
+        Proof incomplete. Current state: q = r = (p = q ∨ r) = r ∨ p = p ∨ q = q ∨ r ∨ p = (q = r = p = q ∨ r = r ∨ p = p ∨ q = q ∨ r ∨ p).
+        13. Logical operators in left of expression are left-associative: q = r = (p = q ∨ r) = r ∨ p = p ∨ q = q ∨ r ∨ p = (q = r = p = q ∨ r = r ∨ p = p ∨ q = q ∨ r ∨ p) → q = r = p = q ∨ r = r ∨ p = p ∨ q = q ∨ r ∨ p = (q = r = p = q ∨ r = r ∨ p = p ∨ q = q ∨ r ∨ p).
+        ⊢ q = r = p = q ∨ r = r ∨ p = p ∨ q = q ∨ r ∨ p = (q = r = p = q ∨ r = r ∨ p = p ∨ q = q ∨ r ∨ p). [Axiom of Symbolic Equality]
+        Proof complete.
+
+[Lemma] q = r = p = (p = (q = r)):
+        1. Logical operators in expression are left-associative: q = r = p = (p = (q = r)) → q = r = p = p = (q = r).
+        ⊢ q = r = p = p = (q = r). [Axiom of Symmetry]
+        Proof complete.
+
+Proof of p ∧ q ∧ r = (p ∧ (q ∧ r)):
+1. Substitute p ∧ q ≡ p = q = p ∨ q into left of expression.
+Proof incomplete. Current state: p = q = p ∨ q ∧ r = (p ∧ (q ∧ r)).
+2. Substitute p = q = p ∨ q ∧ r ≡ p = q = p ∨ q = r = (p = q = p ∨ q) ∨ r into left of expression.
+Proof incomplete. Current state: p = q = p ∨ q = r = (p = q = p ∨ q) ∨ r = (p ∧ (q ∧ r)).
+3. Substitute (p = q = p ∨ q) ∨ r ≡ r ∨ (p = q = p ∨ q) into left of expression.
+Proof incomplete. Current state: p = q = p ∨ q = r = r ∨ (p = q = p ∨ q) = (p ∧ (q ∧ r)).
+4. Substitute r ∨ (p = q = p ∨ q) ≡ r ∨ (p = q) = r ∨ (p ∨ q) into left of expression.
+Proof incomplete. Current state: p = q = p ∨ q = r = (r ∨ (p = q) = r ∨ (p ∨ q)) = (p ∧ (q ∧ r)).
+5. Substitute r ∨ (p = q) ≡ r ∨ p = r ∨ q into left of expression.
+Proof incomplete. Current state: p = q = p ∨ q = r = (r ∨ p = r ∨ q = r ∨ (p ∨ q)) = (p ∧ (q ∧ r)).
+6. Substitute p = q = p ∨ q = r ≡ p = q = (p ∨ q = r) into left of expression.
+Proof incomplete. Current state: p = q = (p ∨ q = r) = (r ∨ p = r ∨ q = r ∨ (p ∨ q)) = (p ∧ (q ∧ r)).
+7. Substitute p ∨ q = r ≡ r = p ∨ q into left of expression.
+Proof incomplete. Current state: p = q = (r = p ∨ q) = (r ∨ p = r ∨ q = r ∨ (p ∨ q)) = (p ∧ (q ∧ r)).
+8. Substitute r ∨ q ≡ q ∨ r into left of expression.
+Proof incomplete. Current state: p = q = (r = p ∨ q) = (r ∨ p = q ∨ r = r ∨ (p ∨ q)) = (p ∧ (q ∧ r)).
+9. Substitute r ∨ p = q ∨ r ≡ q ∨ r = r ∨ p into left of expression.
+Proof incomplete. Current state: p = q = (r = p ∨ q) = (q ∨ r = r ∨ p = r ∨ (p ∨ q)) = (p ∧ (q ∧ r)).
+10. Substitute r ∨ (p ∨ q) ≡ p ∨ q ∨ r into left of expression.
+Proof incomplete. Current state: p = q = (r = p ∨ q) = (q ∨ r = r ∨ p = p ∨ q ∨ r) = (p ∧ (q ∧ r)).
+11. Logical operators in left of expression are left-associative: p = q = (r = p ∨ q) = (q ∨ r = r ∨ p = p ∨ q ∨ r) = (p ∧ (q ∧ r)) → p = q = (r = p ∨ q) = (q ∨ r = r ∨ p) = p ∨ q ∨ r = (p ∧ (q ∧ r)).
+Proof incomplete. Current state: p = q = (r = p ∨ q) = (q ∨ r = r ∨ p) = p ∨ q ∨ r = (p ∧ (q ∧ r)).
+12. Logical operators in left of expression are left-associative: p = q = (r = p ∨ q) = (q ∨ r = r ∨ p) = p ∨ q ∨ r = (p ∧ (q ∧ r)) → p = q = (r = p ∨ q) = q ∨ r = r ∨ p = p ∨ q ∨ r = (p ∧ (q ∧ r)).
+Proof incomplete. Current state: p = q = (r = p ∨ q) = q ∨ r = r ∨ p = p ∨ q ∨ r = (p ∧ (q ∧ r)).
+13. Logical operators in left of expression are left-associative: p = q = (r = p ∨ q) = q ∨ r = r ∨ p = p ∨ q ∨ r = (p ∧ (q ∧ r)) → p = q = r = p ∨ q = q ∨ r = r ∨ p = p ∨ q ∨ r = (p ∧ (q ∧ r)).
+Proof incomplete. Current state: p = q = r = p ∨ q = q ∨ r = r ∨ p = p ∨ q ∨ r = (p ∧ (q ∧ r)).
+14. Substitute p ∧ (q ∧ r) ≡ q ∧ r ∧ p into right of expression.
+Proof incomplete. Current state: p = q = r = p ∨ q = q ∨ r = r ∨ p = p ∨ q ∨ r = (q ∧ r ∧ p).
+15. Substitute q ∧ r ∧ p ≡ q = r = p = q ∨ r = r ∨ p = p ∨ q = q ∨ r ∨ p into right of expression.
+Proof incomplete. Current state: p = q = r = p ∨ q = q ∨ r = r ∨ p = p ∨ q ∨ r = (q = r = p = q ∨ r = r ∨ p = p ∨ q = q ∨ r ∨ p).
+16. Substitute q = r = p ≡ p = (q = r) into right of expression.
+Proof incomplete. Current state: p = q = r = p ∨ q = q ∨ r = r ∨ p = p ∨ q ∨ r = (p = (q = r) = q ∨ r = r ∨ p = p ∨ q = q ∨ r ∨ p).
 </pre>
 </div>
 </div>
@@ -14034,7 +14229,7 @@ Proof incomplete. Current state: p ∧ q = r = (p ∧ q) ∨ r = (p = (q ∧ r) 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-fsharp"><pre><span></span><span class="k">let</span> <span class="n">``3.38``</span> <span class="o">=</span> <span class="n">proof</span> <span class="n">prop_calculus</span> <span class="o">&lt;@</span> <span class="o">(</span><span class="n">p</span> <span class="o">|&amp;|</span> <span class="n">p</span><span class="o">)</span> <span class="o">=</span> <span class="n">p</span> <span class="o">@&gt;</span> <span class="o">[</span>
@@ -14095,7 +14290,7 @@ Proof complete.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-fsharp"><pre><span></span><span class="k">let</span> <span class="n">``3.39``</span> <span class="o">=</span> <span class="n">proof</span> <span class="n">prop_calculus</span> <span class="o">&lt;@</span> <span class="o">(</span><span class="n">p</span> <span class="o">|&amp;|</span> <span class="k">true</span><span class="o">)</span> <span class="o">=</span> <span class="n">p</span> <span class="o">@&gt;</span> <span class="o">[</span>
@@ -14153,7 +14348,7 @@ Proof complete.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-fsharp"><pre><span></span><span class="k">let</span> <span class="n">``3.40``</span> <span class="o">=</span> <span class="n">proof</span> <span class="n">prop_calculus</span> <span class="o">&lt;@</span> <span class="o">(</span><span class="n">p</span> <span class="o">|&amp;|</span> <span class="k">false</span><span class="o">)</span> <span class="o">=</span> <span class="k">false</span> <span class="o">@&gt;</span> <span class="o">[</span>
@@ -14230,7 +14425,7 @@ Proof complete.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-fsharp"><pre><span></span><span class="c1">// Theorem 3.41</span>
@@ -14258,71 +14453,220 @@ Proof complete.
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[Lemma] p ∧ q ∧ p = (p ∧ (q ∧ p)):
-        1. Logical operators in expression are right-associative: p ∧ q ∧ p = (p ∧ (q ∧ p)) → p ∧ (q ∧ p) = (p ∧ (q ∧ p)).
-        ⊢ p ∧ (q ∧ p) = (p ∧ (q ∧ p)). [Axiom of Symbolic Equality]
+<pre>[Lemma] p ∧ q = (p = q = p ∨ q):
+        ⊢ p ∧ q = (p = q = p ∨ q). [Axiom of the Golden Rule]
+        Proof complete.
+
+[Lemma] PropertyGet (None, p, []) = PropertyGet (None, q, []) = p ∨ q ∧ p = (PropertyGet (None, p, []) = PropertyGet (None, q, []) = p ∨ q = p = (PropertyGet (None, p, []) = PropertyGet (None, q, []) = p ∨ q) ∨ p):
+        ⊢ PropertyGet (None, p, []) = PropertyGet (None, q, []) = p ∨ q ∧ p = (PropertyGet (None, p, []) = PropertyGet (None, q, []) = p ∨ q = p = (PropertyGet (None, p, []) = PropertyGet (None, q, []) = p ∨ q) ∨ p). [Axiom of the Golden Rule]
+        Proof complete.
+
+[Lemma] (p = q = p ∨ q) ∨ p = p ∨ (p = q = p ∨ q):
+        ⊢ (p = q = p ∨ q) ∨ p = p ∨ (p = q = p ∨ q). [Axiom of Commutativity]
+        Proof complete.
+
+[Lemma] p ∨ (p = q = p ∨ q) = (p ∨ (p = q) = p ∨ (p ∨ q)):
+        ⊢ p ∨ (p = q = p ∨ q) = (p ∨ (p = q) = p ∨ (p ∨ q)). [Axiom of Distributivity]
+        Proof complete.
+
+[Lemma] p ∨ (p = q) = (p ∨ p = p ∨ q):
+        ⊢ p ∨ (p = q) = (p ∨ p = p ∨ q). [Axiom of Distributivity]
+        Proof complete.
+
+[Lemma] p = q = (p ∨ q = p) = (p = q = p ∨ q = p):
+        1. Logical operators in right of expression are right-associative: p = q = (p ∨ q = p) = (p = q = p ∨ q = p) → p = q = (p ∨ q = p) = (p = q = (p ∨ q = p)).
+        ⊢ p = q = (p ∨ q = p) = (p = q = (p ∨ q = p)). [Axiom of Symbolic Equality]
+        Proof complete.
+
+[Lemma] p = q = p ∨ q = p = (p = q = (p ∨ q = p)):
+        ⊢ p = q = p ∨ q = p = (p = q = (p ∨ q = p)). [Axiom of Associativity]
+        Proof complete.
+
+[Lemma] p ∨ q = p = (p = p ∨ q):
+        1. Logical operators in expression are left-associative: p ∨ q = p = (p = p ∨ q) → p ∨ q = p = p = p ∨ q.
+        ⊢ p ∨ q = p = p = p ∨ q. [Axiom of Symmetry]
         Proof complete.
 
 [Lemma] p ∨ q = q ∨ p:
         ⊢ p ∨ q = q ∨ p. [Axiom of Commutativity]
         Proof complete.
 
-[Lemma] p = q = (q = p):
-        1. Logical operators in expression are left-associative: p = q = (q = p) → p = q = q = p.
-        ⊢ p = q = q = p. [Axiom of Symmetry]
+[Lemma] p ∨ p = q ∨ p = (q ∨ p = p ∨ p):
+        1. Logical operators in expression are left-associative: p ∨ p = q ∨ p = (q ∨ p = p ∨ p) → p ∨ p = q ∨ p = q ∨ p = p ∨ p.
+        ⊢ p ∨ p = q ∨ p = q ∨ p = p ∨ p. [Axiom of Symmetry]
         Proof complete.
 
-[Lemma] q ∧ p = (p ∧ q):
-        1. Logical terms in expression satisfy the golden rule: q ∧ p = (p ∧ q) → q = p = q ∨ p = (p = q = p ∨ q).
-        Proof incomplete. Current state: q = p = q ∨ p = (p = q = p ∨ q).
-        2. Substitute p ∨ q ≡ q ∨ p into right of expression.
-        Proof incomplete. Current state: q = p = q ∨ p = (p = q = q ∨ p).
-        3. Substitute p = q ≡ q = p into right of expression.
-        ⊢ q = p = q ∨ p = (q = p = q ∨ p). [Axiom of Symbolic Equality]
+[Lemma] p ∨ (p ∨ q) = p ∨ q ∨ p:
+        ⊢ p ∨ (p ∨ q) = p ∨ q ∨ p. [Axiom of Commutativity]
         Proof complete.
 
-[Lemma] p ∨ p = p:
-        ⊢ p ∨ p = p. [Axiom of Idempotency]
+[Lemma] (q ∧ p) ∨ p = p ∨ (q ∧ p):
+        ⊢ (q ∧ p) ∨ p = p ∨ (q ∧ p). [Axiom of Commutativity]
         Proof complete.
 
-[Lemma] p ∨ p = p = true = (p ∨ p = p):
-        1. Logical operators in left of expression are commutative: p ∨ p = p = true = (p ∨ p = p) → true = (p ∨ p = p) = (p ∨ p = p).
-        Proof incomplete. Current state: true = (p ∨ p = p) = (p ∨ p = p).
-        2. Logical operators in expression are right-associative: true = (p ∨ p = p) = (p ∨ p = p) → true = (p ∨ p = p = (p ∨ p = p)).
-        ⊢ true = (p ∨ p = p = (p ∨ p = p)). [Definition of true]
+[Lemma] q ∧ p = p = (p = (q ∧ p)):
+        1. Logical operators in expression are left-associative: q ∧ p = p = (p = (q ∧ p)) → q ∧ p = p = p = (q ∧ p).
+        ⊢ q ∧ p = p = p = (q ∧ p). [Axiom of Symmetry]
         Proof complete.
 
-[Lemma] p ∨ p = p = true:
-        1. Substitute p ∨ p = p = true ≡ p ∨ p = p into expression.
-        ⊢ p ∨ p = p. [Axiom of Idempotency]
+[Lemma] p ∧ (q ∧ p) = (q ∧ p ∧ p):
+        1. Logical terms in expression satisfy the golden rule: p ∧ (q ∧ p) = (q ∧ p ∧ p) → p = (q ∧ p) = p ∨ (q ∧ p) = (q ∧ p = p = (q ∧ p) ∨ p).
+        Proof incomplete. Current state: p = (q ∧ p) = p ∨ (q ∧ p) = (q ∧ p = p = (q ∧ p) ∨ p).
+        2. Substitute (q ∧ p) ∨ p ≡ p ∨ (q ∧ p) into right of expression.
+        Proof incomplete. Current state: p = (q ∧ p) = p ∨ (q ∧ p) = (q ∧ p = p = p ∨ (q ∧ p)).
+        3. Substitute q ∧ p = p ≡ p = (q ∧ p) into right of expression.
+        ⊢ p = (q ∧ p) = p ∨ (q ∧ p) = (p = (q ∧ p) = p ∨ (q ∧ p)). [Axiom of Symbolic Equality]
         Proof complete.
 
-[Lemma] p ∧ p = p:
-        1. Logical terms in expression satisfy the golden rule: p ∧ p = p → p = p = p ∨ p = p.
-        Proof incomplete. Current state: p = p = p ∨ p = p.
-        2. Logical operators in expression are right-associative: p = p = p ∨ p = p → p = p = (p ∨ p = p).
-        Proof incomplete. Current state: p = p = (p ∨ p = p).
-        3. Substitute p ∨ p = p ≡ true into right of expression.
-        Proof incomplete. Current state: p = p = true.
-        4. Logical operators in expression are commutative: p = p = true → true = (p = p).
-        ⊢ true = (p = p). [Definition of true]
+[Lemma] q ∧ p = (q = p = q ∨ p):
+        ⊢ q ∧ p = (q = p = q ∨ p). [Axiom of the Golden Rule]
         Proof complete.
 
-Proof of p ∧ (q ∧ r) = (p ∧ q ∧ (p ∧ r)):
-1. Logical operators in right of expression are left-associative: p ∧ (q ∧ r) = (p ∧ q ∧ (p ∧ r)) → p ∧ (q ∧ r) = (p ∧ q ∧ p ∧ r).
-Proof incomplete. Current state: p ∧ (q ∧ r) = (p ∧ q ∧ p ∧ r).
-2. Substitute p ∧ q ∧ p ≡ p ∧ (q ∧ p) into right of expression.
-Proof incomplete. Current state: p ∧ (q ∧ r) = (p ∧ (q ∧ p) ∧ r).
-3. Substitute q ∧ p ≡ p ∧ q into right of expression.
-Proof incomplete. Current state: p ∧ (q ∧ r) = (p ∧ (p ∧ q) ∧ r).
-4. Logical operators in right of expression are left-associative: p ∧ (q ∧ r) = (p ∧ (p ∧ q) ∧ r) → p ∧ (q ∧ r) = (p ∧ p ∧ q ∧ r).
-Proof incomplete. Current state: p ∧ (q ∧ r) = (p ∧ p ∧ q ∧ r).
-5. Substitute p ∧ p ≡ p into right of expression.
-Proof incomplete. Current state: p ∧ (q ∧ r) = (p ∧ q ∧ r).
-6. Logical operators in left of expression are left-associative: p ∧ (q ∧ r) = (p ∧ q ∧ r) → p ∧ q ∧ r = (p ∧ q ∧ r).
-⊢ p ∧ q ∧ r = (p ∧ q ∧ r). [Axiom of Symbolic Equality]
-Proof complete.
+[Lemma] q = p = q ∨ p ∧ p = (q = p = q ∨ p = p = (q = p = q ∨ p) ∨ p):
+        ⊢ q = p = q ∨ p ∧ p = (q = p = q ∨ p = p = (q = p = q ∨ p) ∨ p). [Axiom of the Golden Rule]
+        Proof complete.
+
+[Lemma] (q = p = q ∨ p) ∨ p = p ∨ (q = p = q ∨ p):
+        ⊢ (q = p = q ∨ p) ∨ p = p ∨ (q = p = q ∨ p). [Axiom of Commutativity]
+        Proof complete.
+
+[Lemma] p ∨ (q = p = q ∨ p) = (p ∨ (q = p) = p ∨ (q ∨ p)):
+        ⊢ p ∨ (q = p = q ∨ p) = (p ∨ (q = p) = p ∨ (q ∨ p)). [Axiom of Distributivity]
+        Proof complete.
+
+[Lemma] p ∨ (q = p) = (p ∨ q = p ∨ p):
+        ⊢ p ∨ (q = p) = (p ∨ q = p ∨ p). [Axiom of Distributivity]
+        Proof complete.
+
+[Lemma] q = p = (q ∨ p = p) = (q = p = q ∨ p = p):
+        1. Logical operators in right of expression are right-associative: q = p = (q ∨ p = p) = (q = p = q ∨ p = p) → q = p = (q ∨ p = p) = (q = p = (q ∨ p = p)).
+        ⊢ q = p = (q ∨ p = p) = (q = p = (q ∨ p = p)). [Axiom of Symbolic Equality]
+        Proof complete.
+
+[Lemma] q = p = q ∨ p = p = (q = p = (q ∨ p = p)):
+        ⊢ q = p = q ∨ p = p = (q = p = (q ∨ p = p)). [Axiom of Associativity]
+        Proof complete.
+
+[Lemma] q ∨ p = p = (p = q ∨ p):
+        1. Logical operators in expression are left-associative: q ∨ p = p = (p = q ∨ p) → q ∨ p = p = p = q ∨ p.
+        ⊢ q ∨ p = p = p = q ∨ p. [Axiom of Symmetry]
+        Proof complete.
+
+[Lemma] p ∨ p = p ∨ p:
+        ⊢ p ∨ p = p ∨ p. [Axiom of Symbolic Equality]
+        Proof complete.
+
+[Lemma] p ∨ q = p ∨ p = (p ∨ p = p ∨ q):
+        1. Logical operators in expression are left-associative: p ∨ q = p ∨ p = (p ∨ p = p ∨ q) → p ∨ q = p ∨ p = p ∨ p = p ∨ q.
+        ⊢ p ∨ q = p ∨ p = p ∨ p = p ∨ q. [Axiom of Symmetry]
+        Proof complete.
+
+[Lemma] p ∨ (q ∨ p) = q ∨ p ∨ p:
+        ⊢ p ∨ (q ∨ p) = q ∨ p ∨ p. [Axiom of Commutativity]
+        Proof complete.
+
+[Lemma] q ∧ p ∧ p = (q = p = p = q ∨ p = p ∨ p = p ∨ q = q ∨ p ∨ p):
+        1. Substitute q ∧ p ≡ q = p = q ∨ p into left of expression.
+        Proof incomplete. Current state: q = p = q ∨ p ∧ p = (q = p = p = q ∨ p = p ∨ p = p ∨ q = q ∨ p ∨ p).
+        2. Substitute q = p = q ∨ p ∧ p ≡ q = p = q ∨ p = p = (q = p = q ∨ p) ∨ p into left of expression.
+        Proof incomplete. Current state: q = p = q ∨ p = p = (q = p = q ∨ p) ∨ p = (q = p = p = q ∨ p = p ∨ p = p ∨ q = q ∨ p ∨ p).
+        3. Substitute (q = p = q ∨ p) ∨ p ≡ p ∨ (q = p = q ∨ p) into left of expression.
+        Proof incomplete. Current state: q = p = q ∨ p = p = p ∨ (q = p = q ∨ p) = (q = p = p = q ∨ p = p ∨ p = p ∨ q = q ∨ p ∨ p).
+        4. Substitute p ∨ (q = p = q ∨ p) ≡ p ∨ (q = p) = p ∨ (q ∨ p) into left of expression.
+        Proof incomplete. Current state: q = p = q ∨ p = p = (p ∨ (q = p) = p ∨ (q ∨ p)) = (q = p = p = q ∨ p = p ∨ p = p ∨ q = q ∨ p ∨ p).
+        5. Substitute p ∨ (q = p) ≡ p ∨ q = p ∨ p into left of expression.
+        Proof incomplete. Current state: q = p = q ∨ p = p = (p ∨ q = p ∨ p = p ∨ (q ∨ p)) = (q = p = p = q ∨ p = p ∨ p = p ∨ q = q ∨ p ∨ p).
+        6. Substitute q = p = q ∨ p = p ≡ q = p = (q ∨ p = p) into left of expression.
+        Proof incomplete. Current state: q = p = (q ∨ p = p) = (p ∨ q = p ∨ p = p ∨ (q ∨ p)) = (q = p = p = q ∨ p = p ∨ p = p ∨ q = q ∨ p ∨ p).
+        7. Substitute q ∨ p = p ≡ p = q ∨ p into left of expression.
+        Proof incomplete. Current state: q = p = (p = q ∨ p) = (p ∨ q = p ∨ p = p ∨ (q ∨ p)) = (q = p = p = q ∨ p = p ∨ p = p ∨ q = q ∨ p ∨ p).
+        8. Substitute p ∨ p ≡ p ∨ p into expression: No change.
+        Proof incomplete. Current state: q = p = (p = q ∨ p) = (p ∨ q = p ∨ p = p ∨ (q ∨ p)) = (q = p = p = q ∨ p = p ∨ p = p ∨ q = q ∨ p ∨ p).
+        9. Substitute p ∨ q = p ∨ p ≡ p ∨ p = p ∨ q into left of expression.
+        Proof incomplete. Current state: q = p = (p = q ∨ p) = (p ∨ p = p ∨ q = p ∨ (q ∨ p)) = (q = p = p = q ∨ p = p ∨ p = p ∨ q = q ∨ p ∨ p).
+        10. Substitute p ∨ (q ∨ p) ≡ q ∨ p ∨ p into left of expression.
+        Proof incomplete. Current state: q = p = (p = q ∨ p) = (p ∨ p = p ∨ q = q ∨ p ∨ p) = (q = p = p = q ∨ p = p ∨ p = p ∨ q = q ∨ p ∨ p).
+        11. Logical operators in left of expression are left-associative: q = p = (p = q ∨ p) = (p ∨ p = p ∨ q = q ∨ p ∨ p) = (q = p = p = q ∨ p = p ∨ p = p ∨ q = q ∨ p ∨ p) → q = p = (p = q ∨ p) = (p ∨ p = p ∨ q) = q ∨ p ∨ p = (q = p = p = q ∨ p = p ∨ p = p ∨ q = q ∨ p ∨ p).
+        Proof incomplete. Current state: q = p = (p = q ∨ p) = (p ∨ p = p ∨ q) = q ∨ p ∨ p = (q = p = p = q ∨ p = p ∨ p = p ∨ q = q ∨ p ∨ p).
+        12. Logical operators in left of expression are left-associative: q = p = (p = q ∨ p) = (p ∨ p = p ∨ q) = q ∨ p ∨ p = (q = p = p = q ∨ p = p ∨ p = p ∨ q = q ∨ p ∨ p) → q = p = (p = q ∨ p) = p ∨ p = p ∨ q = q ∨ p ∨ p = (q = p = p = q ∨ p = p ∨ p = p ∨ q = q ∨ p ∨ p).
+        Proof incomplete. Current state: q = p = (p = q ∨ p) = p ∨ p = p ∨ q = q ∨ p ∨ p = (q = p = p = q ∨ p = p ∨ p = p ∨ q = q ∨ p ∨ p).
+        13. Logical operators in left of expression are left-associative: q = p = (p = q ∨ p) = p ∨ p = p ∨ q = q ∨ p ∨ p = (q = p = p = q ∨ p = p ∨ p = p ∨ q = q ∨ p ∨ p) → q = p = p = q ∨ p = p ∨ p = p ∨ q = q ∨ p ∨ p = (q = p = p = q ∨ p = p ∨ p = p ∨ q = q ∨ p ∨ p).
+        ⊢ q = p = p = q ∨ p = p ∨ p = p ∨ q = q ∨ p ∨ p = (q = p = p = q ∨ p = p ∨ p = p ∨ q = q ∨ p ∨ p). [Axiom of Symbolic Equality]
+        Proof complete.
+
+[Lemma] q = p = p = (p = (q = p)):
+        1. Logical operators in expression are left-associative: q = p = p = (p = (q = p)) → q = p = p = p = (q = p).
+        ⊢ q = p = p = p = (q = p). [Axiom of Symmetry]
+        Proof complete.
+
+[Lemma] p = (q = p) = (p = q = p):
+        1. Logical operators in right of expression are right-associative: p = (q = p) = (p = q = p) → p = (q = p) = (p = (q = p)).
+        ⊢ p = (q = p) = (p = (q = p)). [Axiom of Symbolic Equality]
+        Proof complete.
+
+[Lemma] q ∨ p ∨ p = p ∨ (q ∨ p):
+        ⊢ q ∨ p ∨ p = p ∨ (q ∨ p). [Axiom of Commutativity]
+        Proof complete.
+
+[Lemma] p ∨ (q ∨ p) = p ∨ q ∨ p:
+        1. Logical operators in expression are left-associative: p ∨ (q ∨ p) = p ∨ q ∨ p → p ∨ q ∨ p = p ∨ q ∨ p.
+        ⊢ p ∨ q ∨ p = p ∨ q ∨ p. [Axiom of Symbolic Equality]
+        Proof complete.
+
+[Lemma] p = q = p = (q ∨ p = p ∨ p) = (p = q = p = q ∨ p = p ∨ p):
+        1. Logical operators in right of expression are right-associative: p = q = p = (q ∨ p = p ∨ p) = (p = q = p = q ∨ p = p ∨ p) → p = q = p = (q ∨ p = p ∨ p) = (p = q = p = (q ∨ p = p ∨ p)).
+        ⊢ p = q = p = (q ∨ p = p ∨ p) = (p = q = p = (q ∨ p = p ∨ p)). [Axiom of Symbolic Equality]
+        Proof complete.
+
+[Lemma] p = q = p = q ∨ p = p ∨ p = (p = q = p = (q ∨ p = p ∨ p)):
+        ⊢ p = q = p = q ∨ p = p ∨ p = (p = q = p = (q ∨ p = p ∨ p)). [Axiom of Associativity]
+        Proof complete.
+
+[Lemma] p = q = p = q ∨ p = (p ∨ p = p ∨ q) = (p = q = p = q ∨ p = p ∨ p = p ∨ q):
+        1. Logical operators in right of expression are right-associative: p = q = p = q ∨ p = (p ∨ p = p ∨ q) = (p = q = p = q ∨ p = p ∨ p = p ∨ q) → p = q = p = q ∨ p = (p ∨ p = p ∨ q) = (p = q = p = q ∨ p = (p ∨ p = p ∨ q)).
+        ⊢ p = q = p = q ∨ p = (p ∨ p = p ∨ q) = (p = q = p = q ∨ p = (p ∨ p = p ∨ q)). [Axiom of Symbolic Equality]
+        Proof complete.
+
+[Lemma] p = q = p = q ∨ p = p ∨ p = p ∨ q = (p = q = p = q ∨ p = (p ∨ p = p ∨ q)):
+        ⊢ p = q = p = q ∨ p = p ∨ p = p ∨ q = (p = q = p = q ∨ p = (p ∨ p = p ∨ q)). [Axiom of Associativity]
+        Proof complete.
+
+[Lemma] p ∨ p = p ∨ q = (p ∨ q = p ∨ p):
+        1. Logical operators in expression are left-associative: p ∨ p = p ∨ q = (p ∨ q = p ∨ p) → p ∨ p = p ∨ q = p ∨ q = p ∨ p.
+        ⊢ p ∨ p = p ∨ q = p ∨ q = p ∨ p. [Axiom of Symmetry]
+        Proof complete.
+
+[Lemma] p = q = p = (q ∨ p = p ∨ q) = (p = q = p = q ∨ p = p ∨ q):
+        1. Logical operators in right of expression are right-associative: p = q = p = (q ∨ p = p ∨ q) = (p = q = p = q ∨ p = p ∨ q) → p = q = p = (q ∨ p = p ∨ q) = (p = q = p = (q ∨ p = p ∨ q)).
+        ⊢ p = q = p = (q ∨ p = p ∨ q) = (p = q = p = (q ∨ p = p ∨ q)). [Axiom of Symbolic Equality]
+        Proof complete.
+
+[Lemma] p = q = p = q ∨ p = p ∨ q = (p = q = p = (q ∨ p = p ∨ q)):
+        ⊢ p = q = p = q ∨ p = p ∨ q = (p = q = p = (q ∨ p = p ∨ q)). [Axiom of Associativity]
+        Proof complete.
+
+[Lemma] q ∨ p = p ∨ q = (p ∨ q = q ∨ p):
+        1. Logical operators in expression are left-associative: q ∨ p = p ∨ q = (p ∨ q = q ∨ p) → q ∨ p = p ∨ q = p ∨ q = q ∨ p.
+        ⊢ q ∨ p = p ∨ q = p ∨ q = q ∨ p. [Axiom of Symmetry]
+        Proof complete.
+
 </pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+Unhandled Exception
+The expression p |&amp;| q |&amp;| p = p |&amp;| (q |&amp;| p) is not an identity
+   at Microsoft.FSharp.Core.PrintfModule.PrintFormatToStringThenFail@1637.Invoke(String message) in F:\workspace.1\_work\1\s\src\fsharp\FSharp.Core\printf.fs:line 1637
+   at Sylvester.ProofModule.ident[t](Theory theory, FSharpExpr`1 e, FSharpList`1 steps)
+   at Sylvester.PropCalculus.right_assoc_and(FSharpExpr`1 p, FSharpExpr`1 q, FSharpExpr`1 r)
+   at &lt;StartupCode$FSI_0027&gt;.$FSI_0027.main@()</pre>
 </div>
 </div>
 
@@ -14332,7 +14676,7 @@ Proof complete.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-fsharp"><pre><span></span><span class="k">let</span> <span class="n">``3.42``</span> <span class="o">=</span> <span class="n">proof</span> <span class="n">prop_calculus</span> <span class="o">&lt;@</span><span class="n">p</span> <span class="o">|&amp;|</span> <span class="ow">not</span> <span class="n">p</span> <span class="o">=</span> <span class="k">false</span><span class="o">@&gt;</span> <span class="o">[</span>
@@ -14418,10 +14762,10 @@ Proof complete.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-fsharp"><pre><span></span><span class="k">let</span> <span class="n">``3.43``</span> <span class="o">=</span> <span class="n">proof</span> <span class="n">prop_calculus</span> <span class="o">&lt;@</span> <span class="o">(</span><span class="n">p</span> <span class="o">|&amp;|</span> <span class="o">(</span><span class="n">p</span> <span class="o">|||</span> <span class="n">q</span><span class="o">))</span> <span class="o">=</span> <span class="n">p</span> <span class="o">@&gt;</span> <span class="o">[</span>
+<div class=" highlight hl-fsharp"><pre><span></span><span class="k">let</span> <span class="n">``3.43a``</span> <span class="o">=</span> <span class="n">proof</span> <span class="n">prop_calculus</span> <span class="o">&lt;@</span> <span class="o">(</span><span class="n">p</span> <span class="o">|&amp;|</span> <span class="o">(</span><span class="n">p</span> <span class="o">|||</span> <span class="n">q</span><span class="o">))</span> <span class="o">=</span> <span class="n">p</span> <span class="o">@&gt;</span> <span class="o">[</span>
     <span class="n">GoldenRule</span> <span class="o">|&gt;</span> <span class="n">L</span>
     <span class="n">left_assoc_or</span> <span class="o">&lt;@</span> <span class="n">p</span> <span class="o">@&gt;</span> <span class="o">&lt;@</span> <span class="n">p</span> <span class="o">@&gt;</span> <span class="o">&lt;@</span> <span class="n">q</span> <span class="o">@&gt;</span> <span class="o">|&gt;</span> <span class="n">L</span>
     <span class="n">idemp_or</span> <span class="o">&lt;@</span> <span class="n">p</span> <span class="o">@&gt;</span> <span class="o">|&gt;</span> <span class="n">L</span>
@@ -14469,13 +14813,12 @@ Proof complete.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-fsharp"><pre><span></span><span class="k">let</span> <span class="n">``3.44``</span> <span class="o">=</span> <span class="n">proof</span> <span class="n">prop_calculus</span> <span class="o">&lt;@</span> <span class="o">(</span><span class="n">p</span> <span class="o">|||</span> <span class="o">(</span><span class="n">p</span> <span class="o">|&amp;|</span> <span class="n">q</span><span class="o">))</span> <span class="o">=</span> <span class="n">p</span> <span class="o">@&gt;</span> <span class="o">[</span>
+<div class=" highlight hl-fsharp"><pre><span></span><span class="k">let</span> <span class="n">``3.43b``</span> <span class="o">=</span> <span class="n">proof</span> <span class="n">prop_calculus</span> <span class="o">&lt;@</span> <span class="o">(</span><span class="n">p</span> <span class="o">|||</span> <span class="o">(</span><span class="n">p</span> <span class="o">|&amp;|</span> <span class="n">q</span><span class="o">))</span> <span class="o">=</span> <span class="n">p</span> <span class="o">@&gt;</span> <span class="o">[</span>
     <span class="n">GoldenRule</span> <span class="o">|&gt;</span> <span class="n">L</span>
     <span class="n">Distrib</span> <span class="o">|&gt;</span> <span class="n">L</span>
-    <span class="n">Distrib</span> <span class="o">|&gt;</span> <span class="n">R</span>
     <span class="n">left_assoc_or</span> <span class="o">&lt;@</span> <span class="n">p</span> <span class="o">@&gt;</span> <span class="o">&lt;@</span> <span class="n">p</span> <span class="o">@&gt;</span> <span class="o">&lt;@</span> <span class="n">q</span> <span class="o">@&gt;</span> <span class="o">|&gt;</span> <span class="n">L</span>
     <span class="n">idemp_or</span> <span class="o">&lt;@</span> <span class="n">p</span> <span class="o">@&gt;</span> <span class="o">|&gt;</span> <span class="n">L</span>
     <span class="n">Distrib</span> <span class="o">|&gt;</span> <span class="n">L</span>
@@ -14515,16 +14858,212 @@ Proof of p ∨ (p ∧ q) = p:
 Proof incomplete. Current state: p ∨ (p = q = p ∨ q) = p.
 2. Distribute logical terms in left of expression: p ∨ (p = q = p ∨ q) = p → p ∨ (p = q) = p ∨ (p ∨ q) = p.
 Proof incomplete. Current state: p ∨ (p = q) = p ∨ (p ∨ q) = p.
-3. Distribute logical terms in expression: No change.
-Proof incomplete. Current state: p ∨ (p = q) = p ∨ (p ∨ q) = p.
-4. Substitute p ∨ (p ∨ q) ≡ p ∨ p ∨ q into left of expression.
+3. Substitute p ∨ (p ∨ q) ≡ p ∨ p ∨ q into left of expression.
 Proof incomplete. Current state: p ∨ (p = q) = p ∨ p ∨ q = p.
-5. Substitute p ∨ p ≡ p into left of expression.
+4. Substitute p ∨ p ≡ p into left of expression.
 Proof incomplete. Current state: p ∨ (p = q) = p ∨ q = p.
-6. Distribute logical terms in left of expression: p ∨ (p = q) = p ∨ q = p → p ∨ p = p ∨ q = p ∨ q = p.
+5. Distribute logical terms in left of expression: p ∨ (p = q) = p ∨ q = p → p ∨ p = p ∨ q = p ∨ q = p.
 Proof incomplete. Current state: p ∨ p = p ∨ q = p ∨ q = p.
-7. Substitute p ∨ p ≡ p into left of expression.
+6. Substitute p ∨ p ≡ p into left of expression.
 ⊢ p = p ∨ q = p ∨ q = p. [Axiom of Symmetry]
+Proof complete.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-fsharp"><pre><span></span><span class="k">let</span> <span class="n">``3.44a``</span> <span class="o">=</span> <span class="n">proof</span> <span class="n">prop_calculus</span> <span class="o">&lt;@</span> <span class="n">p</span> <span class="o">|&amp;|</span> <span class="o">(</span><span class="ow">not</span> <span class="n">p</span> <span class="o">|||</span> <span class="n">q</span><span class="o">)</span> <span class="o">=</span> <span class="o">(</span><span class="n">p</span> <span class="o">|&amp;|</span> <span class="n">q</span><span class="o">)</span> <span class="o">@&gt;</span> <span class="o">[</span>
+    <span class="n">GoldenRule</span> <span class="o">|&gt;</span> <span class="n">L</span>
+    <span class="n">left_assoc_or</span> <span class="o">&lt;@</span> <span class="n">p</span> <span class="o">@&gt;</span> <span class="o">&lt;@</span> <span class="ow">not</span> <span class="n">p</span> <span class="o">@&gt;</span> <span class="o">&lt;@</span> <span class="n">q</span> <span class="o">@&gt;</span> <span class="o">|&gt;</span> <span class="n">L</span>
+    <span class="n">ExcludedMiddle</span> <span class="o">|&gt;</span> <span class="n">L</span>
+    <span class="n">zero_or</span> <span class="o">&lt;@</span> <span class="n">q</span> <span class="o">@&gt;</span> <span class="o">|&gt;</span> <span class="n">TrnL</span> <span class="o">|&gt;</span> <span class="n">L</span>
+    <span class="n">ident_eq</span> <span class="o">&lt;@</span> <span class="n">p</span> <span class="o">=</span> <span class="o">(</span><span class="ow">not</span> <span class="n">p</span> <span class="o">|||</span> <span class="n">q</span><span class="o">)</span> <span class="o">@&gt;</span> <span class="o">|&gt;</span> <span class="n">L</span>
+    <span class="n">commute_or</span> <span class="o">&lt;@</span> <span class="ow">not</span> <span class="n">p</span><span class="o">@&gt;</span> <span class="o">&lt;@</span> <span class="n">q</span> <span class="o">@&gt;</span> <span class="o">|&gt;</span> <span class="n">L</span>
+    <span class="n">ident_or_not_or</span> <span class="o">&lt;@</span> <span class="n">q</span> <span class="o">@&gt;</span> <span class="o">&lt;@</span> <span class="n">p</span> <span class="o">@&gt;</span> <span class="o">|&gt;</span> <span class="n">L</span>
+    <span class="n">LeftAssoc</span> <span class="o">|&gt;</span> <span class="n">L</span>
+    <span class="n">commute_or</span> <span class="o">&lt;@</span> <span class="n">q</span> <span class="o">@&gt;</span> <span class="o">&lt;@</span> <span class="n">p</span> <span class="o">@&gt;</span> <span class="o">|&gt;</span> <span class="n">L</span>
+    <span class="n">golden_rule</span> <span class="o">&lt;@</span> <span class="n">p</span> <span class="o">@&gt;</span> <span class="o">&lt;@</span> <span class="n">q</span> <span class="o">@&gt;</span> <span class="o">|&gt;</span> <span class="n">Trn</span> <span class="o">|&gt;</span> <span class="n">L</span>
+<span class="o">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[Lemma] p ∨ (¬ p ∨ q) = p ∨ ¬ p ∨ q:
+        1. Logical operators in expression are left-associative: p ∨ (¬ p ∨ q) = p ∨ ¬ p ∨ q → p ∨ ¬ p ∨ q = p ∨ ¬ p ∨ q.
+        ⊢ p ∨ ¬ p ∨ q = p ∨ ¬ p ∨ q. [Axiom of Symbolic Equality]
+        Proof complete.
+
+[Lemma] true = (q = q):
+        ⊢ true = (q = q). [Definition of true]
+        Proof complete.
+
+[Lemma] q ∨ true = true:
+        1. Substitute true ≡ q = q into expression.
+        Proof incomplete. Current state: q ∨ (q = q) = (q = q).
+        2. Distribute logical terms in expression: q ∨ (q = q) = (q = q) → q ∨ q = q ∨ q = (q = q).
+        Proof incomplete. Current state: q ∨ q = q ∨ q = (q = q).
+        3. Substitute idempotent logical terms in expression: q ∨ q = q ∨ q = (q = q) → q = q = (q = q).
+        ⊢ q = q = (q = q). [Axiom of Symbolic Equality]
+        Proof complete.
+
+[Lemma] true ∨ q = true:
+        1. Logical operators in left of expression are commutative: true ∨ q = true → q ∨ true = true.
+        Proof incomplete. Current state: q ∨ true = true.
+        2. Substitute true ≡ q = q into expression.
+        Proof incomplete. Current state: q ∨ (q = q) = (q = q).
+        3. Distribute logical terms in expression: q ∨ (q = q) = (q = q) → q ∨ q = q ∨ q = (q = q).
+        Proof incomplete. Current state: q ∨ q = q ∨ q = (q = q).
+        4. Substitute idempotent logical terms in expression: q ∨ q = q ∨ q = (q = q) → q = q = (q = q).
+        ⊢ q = q = (q = q). [Axiom of Symbolic Equality]
+        Proof complete.
+
+[Lemma] p = ¬ p ∨ q = true = (p = ¬ p ∨ q):
+        1. Logical operators in left of expression are commutative: p = ¬ p ∨ q = true = (p = ¬ p ∨ q) → true = (p = ¬ p ∨ q) = (p = ¬ p ∨ q).
+        Proof incomplete. Current state: true = (p = ¬ p ∨ q) = (p = ¬ p ∨ q).
+        2. Logical operators in expression are right-associative: true = (p = ¬ p ∨ q) = (p = ¬ p ∨ q) → true = (p = ¬ p ∨ q = (p = ¬ p ∨ q)).
+        ⊢ true = (p = ¬ p ∨ q = (p = ¬ p ∨ q)). [Definition of true]
+        Proof complete.
+
+[Lemma] ¬ p ∨ q = q ∨ ¬ p:
+        ⊢ ¬ p ∨ q = q ∨ ¬ p. [Axiom of Commutativity]
+        Proof complete.
+
+[Lemma] q ∨ (¬ p = p) = (q ∨ ¬ p = q ∨ p):
+        ⊢ q ∨ (¬ p = p) = (q ∨ ¬ p = q ∨ p). [Axiom of Distributivity]
+        Proof complete.
+
+[Lemma] q ∨ ¬ p = q ∨ p = q ∨ (¬ p = p):
+        1. Logical operators in expression are commutative: q ∨ ¬ p = q ∨ p = q ∨ (¬ p = p) → q ∨ (¬ p = p) = (q ∨ ¬ p = q ∨ p).
+        ⊢ q ∨ (¬ p = p) = (q ∨ ¬ p = q ∨ p). [Axiom of Distributivity]
+        Proof complete.
+
+[Lemma] true = (p = p):
+        ⊢ true = (p = p). [Definition of true]
+        Proof complete.
+
+[Lemma] p = p = true:
+        1. Logical operators in expression are commutative: p = p = true → true = (p = p).
+        ⊢ true = (p = p). [Definition of true]
+        Proof complete.
+
+[Lemma] false = (¬ p = p):
+        1. Collect distributed logical terms in expression: false = (¬ p = p) → false = ¬ (p = p).
+        Proof incomplete. Current state: false = ¬ (p = p).
+        2. Substitute p = p ≡ true into right of expression.
+        ⊢ false = ¬ true. [Definition of false]
+        Proof complete.
+
+[Lemma] ¬ p = p = false:
+        1. Logical operators in expression are commutative: ¬ p = p = false → false = (¬ p = p).
+        Proof incomplete. Current state: false = (¬ p = p).
+        2. Collect distributed logical terms in expression: false = (¬ p = p) → false = ¬ (p = p).
+        Proof incomplete. Current state: false = ¬ (p = p).
+        3. Substitute p = p ≡ true into right of expression.
+        ⊢ false = ¬ true. [Definition of false]
+        Proof complete.
+
+[Lemma] true = (q = q):
+        ⊢ true = (q = q). [Definition of true]
+        Proof complete.
+
+[Lemma] q = q = true:
+        1. Logical operators in expression are commutative: q = q = true → true = (q = q).
+        ⊢ true = (q = q). [Definition of true]
+        Proof complete.
+
+[Lemma] false = (¬ q = q):
+        1. Collect distributed logical terms in expression: false = (¬ q = q) → false = ¬ (q = q).
+        Proof incomplete. Current state: false = ¬ (q = q).
+        2. Substitute q = q ≡ true into right of expression.
+        ⊢ false = ¬ true. [Definition of false]
+        Proof complete.
+
+[Lemma] true = (q = q):
+        ⊢ true = (q = q). [Definition of true]
+        Proof complete.
+
+[Lemma] q ∨ false = q:
+        1. Substitute false ≡ ¬ q = q into expression.
+        Proof incomplete. Current state: q ∨ (¬ q = q) = q.
+        2. Distribute logical terms in left of expression: q ∨ (¬ q = q) = q → q ∨ ¬ q = q ∨ q = q.
+        Proof incomplete. Current state: q ∨ ¬ q = q ∨ q = q.
+        3. Logical operators in expression are right-associative: q ∨ ¬ q = q ∨ q = q → q ∨ ¬ q = (q ∨ q = q).
+        Proof incomplete. Current state: q ∨ ¬ q = (q ∨ q = q).
+        4. Substitute idempotent logical terms in right of expression: q ∨ ¬ q = (q ∨ q = q) → q ∨ ¬ q = (q = q).
+        Proof incomplete. Current state: q ∨ ¬ q = (q = q).
+        5. Substitute true ≡ q = q into expression: No change.
+        Proof incomplete. Current state: q ∨ ¬ q = (q = q).
+        6. Logical terms in left of expression satisfy the law of excluded middle: q ∨ ¬ q = (q = q) → true = (q = q).
+        ⊢ true = (q = q). [Definition of true]
+        Proof complete.
+
+[Lemma] q ∨ ¬ p = (q = q ∨ p):
+        1. Logical operators in right of expression are commutative: q ∨ ¬ p = (q = q ∨ p) → q ∨ ¬ p = (q ∨ p = q).
+        Proof incomplete. Current state: q ∨ ¬ p = (q ∨ p = q).
+        2. Logical operators in expression are left-associative: q ∨ ¬ p = (q ∨ p = q) → q ∨ ¬ p = q ∨ p = q.
+        Proof incomplete. Current state: q ∨ ¬ p = q ∨ p = q.
+        3. Substitute q ∨ ¬ p = q ∨ p ≡ q ∨ (¬ p = p) into left of expression.
+        Proof incomplete. Current state: q ∨ (¬ p = p) = q.
+        4. Substitute ¬ p = p ≡ false into left of expression.
+        Proof incomplete. Current state: q ∨ false = q.
+        5. Substitute q ∨ false ≡ q into left of expression.
+        ⊢ q = q. [Axiom of Symbolic Equality]
+        Proof complete.
+
+[Lemma] q ∨ p = p ∨ q:
+        ⊢ q ∨ p = p ∨ q. [Axiom of Commutativity]
+        Proof complete.
+
+[Lemma] p ∧ q = (p = q = p ∨ q):
+        ⊢ p ∧ q = (p = q = p ∨ q). [Axiom of the Golden Rule]
+        Proof complete.
+
+[Lemma] p = q = p ∨ q = (p ∧ q):
+        1. Logical operators in expression are commutative: p = q = p ∨ q = (p ∧ q) → p ∧ q = (p = q = p ∨ q).
+        ⊢ p ∧ q = (p = q = p ∨ q). [Axiom of the Golden Rule]
+        Proof complete.
+
+Proof of p ∧ ¬ p ∨ q = (p ∧ q):
+1. Logical terms in left of expression satisfy the golden rule: p ∧ ¬ p ∨ q = (p ∧ q) → p = ¬ p ∨ q = p ∨ (¬ p ∨ q) = (p ∧ q).
+Proof incomplete. Current state: p = ¬ p ∨ q = p ∨ (¬ p ∨ q) = (p ∧ q).
+2. Substitute p ∨ (¬ p ∨ q) ≡ p ∨ ¬ p ∨ q into left of expression.
+Proof incomplete. Current state: p = ¬ p ∨ q = p ∨ ¬ p ∨ q = (p ∧ q).
+3. Logical terms in left of expression satisfy the law of excluded middle: p = ¬ p ∨ q = p ∨ ¬ p ∨ q = (p ∧ q) → p = ¬ p ∨ q = true ∨ q = (p ∧ q).
+Proof incomplete. Current state: p = ¬ p ∨ q = true ∨ q = (p ∧ q).
+4. Substitute true ∨ q ≡ true into left of expression.
+Proof incomplete. Current state: p = ¬ p ∨ q = true = (p ∧ q).
+5. Substitute p = ¬ p ∨ q = true ≡ p = ¬ p ∨ q into left of expression.
+Proof incomplete. Current state: p = ¬ p ∨ q = (p ∧ q).
+6. Substitute ¬ p ∨ q ≡ q ∨ ¬ p into left of expression.
+Proof incomplete. Current state: p = q ∨ ¬ p = (p ∧ q).
+7. Substitute q ∨ ¬ p ≡ q = q ∨ p into left of expression.
+Proof incomplete. Current state: p = (q = q ∨ p) = (p ∧ q).
+8. Logical operators in left of expression are left-associative: p = (q = q ∨ p) = (p ∧ q) → p = q = q ∨ p = (p ∧ q).
+Proof incomplete. Current state: p = q = q ∨ p = (p ∧ q).
+9. Substitute q ∨ p ≡ p ∨ q into left of expression.
+Proof incomplete. Current state: p = q = p ∨ q = (p ∧ q).
+10. Substitute p = q = p ∨ q ≡ p ∧ q into left of expression.
+⊢ p ∧ q = (p ∧ q). [Axiom of Symbolic Equality]
 Proof complete.
 </pre>
 </div>
